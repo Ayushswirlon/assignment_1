@@ -84,8 +84,8 @@ export default function Home() {
             <option value="all">All Categories</option>
             <option value="electronics">Electronics</option>
             <option value="jewelery">Jewelery</option>
-            <option value="men's clothing">Men's Clothing</option>
-            <option value="women's clothing">Women's Clothing</option>
+            <option value="men's clothing">Men&lsquo;s Clothing</option>
+            <option value="women's clothing">Women&lsquo;s Clothing</option>
           </select>
         </div>
 

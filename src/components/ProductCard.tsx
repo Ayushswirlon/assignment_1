@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { useCart } from "../context/CartContext";
-import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Link from "next/link";
 

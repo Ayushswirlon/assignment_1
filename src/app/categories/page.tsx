@@ -1,6 +1,3 @@
-import Image from "next/image";
-import Link from "next/link";
-import ProductCard from "@/components/ProductCard";
 import CarouselCard from "@/components/CarouselCard";
 
 export default async function Home() {

@@ -1,15 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import {
-  Home,
-  Search,
-  Menu,
-  X,
-  ShoppingCart,
-  MapPin,
-  Utensils,
-  Info,
-} from "lucide-react";
+import { X } from "lucide-react";
 
 const MobileNav = ({ isOpen, setIsOpen, navLinks, pathname }) => {
   return (
