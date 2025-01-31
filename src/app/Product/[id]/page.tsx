@@ -16,12 +16,12 @@ type Product = {
   };
 };
 
-interface ProductDetailsProps {
+export default async function ProductDetails({
+  params,
+}: {
   params: { id: string };
-}
-
-export default async function ProductDetails({ params }: ProductDetailsProps) {
-  const productId = params?.id;
+}) {
+  const productId = params.id;
 
   if (!productId) {
     return <div>Product ID not found</div>;
