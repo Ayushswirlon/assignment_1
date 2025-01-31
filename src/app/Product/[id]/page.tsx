@@ -16,11 +16,8 @@ type Product = {
   };
 };
 
-interface ProductDetailsProps {
-  params: { id: string };
-}
-
-const ProductDetails: React.FC<ProductDetailsProps> = async ({ params }) => {
+// In the App Router, you can directly access params from the URL
+const ProductDetails = async ({ params }: { params: { id: string } }) => {
   const { id } = params;
 
   // Fetching the product data
