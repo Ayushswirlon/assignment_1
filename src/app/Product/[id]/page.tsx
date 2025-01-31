@@ -1,8 +1,8 @@
 import React from "react";
 import Image from "next/image";
-
 import Button from "./Button";
 
+// Product type definition
 type Product = {
   id: number;
   title: string;
@@ -15,23 +15,18 @@ type Product = {
     count: number;
   };
 };
+
 interface ProductDetailsProps {
   params: { id: string };
 }
 
-export default async function ProductDetails({ params }: ProductDetailsProps) {
-  const productId = params.id;
+const ProductDetails: React.FC<ProductDetailsProps> = async ({ params }) => {
+  const { id } = params;
 
-  if (!productId) {
-    return <div>Product ID not found</div>;
-  }
-
-  const response = await fetch(
-    `https://fakestoreapi.com/products/${productId}`
-  );
-
+  // Fetching the product data
+  const response = await fetch(`https://fakestoreapi.com/products/${id}`);
   if (!response.ok) {
-    throw new Error("Product not found");
+    return <div>Product not found</div>;
   }
 
   const product: Product = await response.json();
@@ -103,4 +98,6 @@ export default async function ProductDetails({ params }: ProductDetailsProps) {
       </div>
     </div>
   );
-}
+};
+
+export default ProductDetails;
