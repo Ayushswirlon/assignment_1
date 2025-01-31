@@ -15,16 +15,13 @@ type Product = {
   };
 };
 
-type ProductDetailsProps = {
+interface ProductDetailsProps {
   params: { id: string };
-};
+}
 
-export default async function ProductDetails({
-  params,
-}: Readonly<ProductDetailsProps>) {
+export default async function ProductDetails({ params }: ProductDetailsProps) {
   const productid = params.id;
 
-  // Fetch the product
   const response = await fetch(
     `https://fakestoreapi.com/products/${productid}`
   );
