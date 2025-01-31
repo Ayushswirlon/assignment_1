@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { Home, Search, Menu, X } from "lucide-react";
+import { Search, Menu, X } from "lucide-react";
 import { usePathname } from "next/navigation";
 import BottomNav from "./BottomNav";
 import MobileNav from "./MobileNav";
