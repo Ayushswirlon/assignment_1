@@ -1,7 +1,5 @@
-// app/products/[id]/page.tsx
 import React from "react";
 import Image from "next/image";
-
 import Button from "./Button";
 
 type Product = {
@@ -21,11 +19,19 @@ type ProductDetailsProps = {
   params: { id: string };
 };
 
-export default async function ProductDetails({ params }: ProductDetailsProps) {
+export default async function ProductDetails({
+  params,
+}: Readonly<ProductDetailsProps>) {
   const productid = params.id;
+
+  // Fetch the product
   const response = await fetch(
     `https://fakestoreapi.com/products/${productid}`
   );
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch product");
+  }
 
   const product: Product = await response.json();
 
@@ -38,9 +44,9 @@ export default async function ProductDetails({ params }: ProductDetailsProps) {
             src={product.image}
             alt={product.title}
             layout="fill"
-            objectFit="contain" // Ensures the full image is visible
+            objectFit="contain"
             className="rounded-lg shadow-lg"
-            priority // Loads the image faster
+            priority
           />
         </div>
 
@@ -90,7 +96,7 @@ export default async function ProductDetails({ params }: ProductDetailsProps) {
             </span>
           </div>
 
-          {/* Add to Cart Button with Proper Spacing */}
+          {/* Add to Cart Button */}
           <Button product={product} value="Add to Cart" />
         </div>
       </div>
