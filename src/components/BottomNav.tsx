@@ -2,16 +2,7 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {
-  Home,
-  Search,
-  Menu,
-  X,
-  ShoppingCart,
-  MapPin,
-  Utensils,
-  Info,
-} from "lucide-react";
+import { ShoppingCart, MapPin, Utensils, Info } from "lucide-react";
 const NavItem = [
   { name: "Cart", href: "/cart", logo: <ShoppingCart size={24} /> },
   { name: "Location", href: "/location", logo: <MapPin size={24} /> },
