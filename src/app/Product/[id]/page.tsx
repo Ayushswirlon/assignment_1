@@ -15,12 +15,11 @@ type Product = {
     count: number;
   };
 };
-
-export default async function ProductDetails({
-  params,
-}: {
+interface ProductDetailsProps {
   params: { id: string };
-}) {
+}
+
+export default async function ProductDetails({ params }: ProductDetailsProps) {
   const productId = params.id;
 
   if (!productId) {
