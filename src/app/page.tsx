@@ -23,6 +23,7 @@ export default function Home() {
   const [priceFilter, setPriceFilter] = useState<string>("all");
   const [ratingFilter, setRatingFilter] = useState<number>(0); // Store the rating threshold
   const { query } = useSearch();
+
   useEffect(() => {
     // Fetch product data with error handling
     const fetchProducts = async () => {
@@ -74,10 +75,11 @@ export default function Home() {
       <h1 className="text-3xl font-bold text-center mb-10">Our Products</h1>
 
       {/* Filter Section */}
-      <div className="flex justify-between mb-6">
-        <div>
+      <div className="flex flex-wrap justify-between gap-4 mb-6">
+        {/* Category Filter */}
+        <div className="w-full sm:w-auto">
           <select
-            className="p-2 border rounded"
+            className="p-2 border rounded w-full sm:w-auto"
             value={categoryFilter}
             onChange={(e) => setCategoryFilter(e.target.value)}
           >
@@ -89,9 +91,10 @@ export default function Home() {
           </select>
         </div>
 
-        <div>
+        {/* Price Filter */}
+        <div className="w-full sm:w-auto">
           <select
-            className="p-2 border rounded"
+            className="p-2 border rounded w-full sm:w-auto"
             value={priceFilter}
             onChange={(e) => setPriceFilter(e.target.value)}
           >
@@ -102,9 +105,9 @@ export default function Home() {
         </div>
 
         {/* Rating Filter */}
-        <div>
+        <div className="w-full sm:w-auto">
           <select
-            className="p-2 border rounded"
+            className="p-2 border rounded w-full sm:w-auto"
             value={ratingFilter}
             onChange={(e) => setRatingFilter(Number(e.target.value))}
           >
@@ -118,7 +121,6 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Product List */}
       {/* Product List */}
       {filteredProducts.filter((prod) =>
         prod.title.toLowerCase().includes(query.toLowerCase())
