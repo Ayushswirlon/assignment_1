@@ -16,25 +16,17 @@ type Product = {
   };
 };
 
-// ✅ Ensure this page uses dynamic rendering
-export const dynamic = "force-dynamic";
-
-const ProductDetails = async ({ params }: { params: { id: string } }) => {
-  // ✅ Ensure params.id is used correctly
-  if (!params || !params.id) {
-    return (
-      <div className="text-center text-red-500 mt-20">Invalid Product ID</div>
-    );
-  }
-
+export default async function ProductDetails({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
   try {
+    const { id } = await params;
     // ✅ Fetch product data dynamically
-    const response = await fetch(
-      `https://fakestoreapi.com/products/${params.id}`,
-      {
-        cache: "no-store",
-      }
-    );
+    const response = await fetch(`https://fakestoreapi.com/products/${id}`, {
+      cache: "no-store",
+    });
 
     if (!response.ok) {
       throw new Error("Product not found");
@@ -110,6 +102,4 @@ const ProductDetails = async ({ params }: { params: { id: string } }) => {
       <div className="text-center text-red-500 mt-20">Product not found</div>
     );
   }
-};
-
-export default ProductDetails;
+}
