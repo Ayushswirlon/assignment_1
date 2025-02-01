@@ -18,7 +18,7 @@ type Product = {
 
 // In the App Router, you can directly access params from the URL
 const ProductDetails = async ({ params }: { params: { id: string } }) => {
-  const { id } = params;
+  const { id } = await params;
 
   // Fetching the product data
   const response = await fetch(`https://fakestoreapi.com/products/${id}`);
