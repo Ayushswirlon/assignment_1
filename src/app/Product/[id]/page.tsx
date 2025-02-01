@@ -2,7 +2,6 @@ import React from "react";
 import Image from "next/image";
 import Button from "./Button";
 
-// Product type definition
 type Product = {
   id: number;
   title: string;
@@ -16,12 +15,14 @@ type Product = {
   };
 };
 
-// In the App Router, you can directly access params from the URL
 const ProductDetails = async ({ params }: { params: { id: string } }) => {
-  const { id } = await params;
+  const { id } = params;
 
-  // Fetching the product data
-  const response = await fetch(`https://fakestoreapi.com/products/${id}`);
+  // Fetching product data with no caching to avoid stale data issues
+  const response = await fetch(`https://fakestoreapi.com/products/${id}`, {
+    cache: "no-store",
+  });
+
   if (!response.ok) {
     return <div>Product not found</div>;
   }
@@ -31,7 +32,6 @@ const ProductDetails = async ({ params }: { params: { id: string } }) => {
   return (
     <div className="max-w-4xl mx-auto p-8 bg-white text-black rounded-lg shadow-lg min-h-screen pb-24">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-12">
-        {/* Product Image */}
         <div className="relative w-full max-w-md h-96 mx-auto">
           <Image
             src={product.image}
@@ -43,14 +43,12 @@ const ProductDetails = async ({ params }: { params: { id: string } }) => {
           />
         </div>
 
-        {/* Product Details */}
         <div className="space-y-6">
           <h1 className="text-3xl sm:text-4xl font-bold">{product.title}</h1>
           <p className="text-lg sm:text-xl text-gray-700">
             {product.description}
           </p>
 
-          {/* Rating Section */}
           <div className="flex items-center space-x-2 text-gray-600">
             <div className="flex">
               {[...Array(5)].map((_, index) => (
@@ -79,7 +77,6 @@ const ProductDetails = async ({ params }: { params: { id: string } }) => {
             </span>
           </div>
 
-          {/* Price and Category */}
           <div className="flex justify-between items-center">
             <p className="text-2xl font-semibold">
               ${product.price.toFixed(2)}
@@ -89,7 +86,6 @@ const ProductDetails = async ({ params }: { params: { id: string } }) => {
             </span>
           </div>
 
-          {/* Add to Cart Button */}
           <Button product={product} value="Add to Cart" />
         </div>
       </div>
