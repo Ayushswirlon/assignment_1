@@ -1,8 +1,8 @@
 import React from "react";
 import Image from "next/image";
-import Button from "./Button";
+import Button from "./Button"; // Ensure correct import path
 
-// Define the product type
+// Define Product Type
 type Product = {
   id: number;
   title: string;
@@ -16,15 +16,25 @@ type Product = {
   };
 };
 
-// Ensure this is in "app/product/[id]/page.tsx"
+// ✅ Ensure this page uses dynamic rendering
+export const dynamic = "force-dynamic";
+
 const ProductDetails = async ({ params }: { params: { id: string } }) => {
-  const { id } = params;
+  // ✅ Ensure params.id is used correctly
+  if (!params || !params.id) {
+    return (
+      <div className="text-center text-red-500 mt-20">Invalid Product ID</div>
+    );
+  }
 
   try {
-    // Fetching product data (Avoids stale cache)
-    const response = await fetch(`https://fakestoreapi.com/products/${id}`, {
-      cache: "no-store",
-    });
+    // ✅ Fetch product data dynamically
+    const response = await fetch(
+      `https://fakestoreapi.com/products/${params.id}`,
+      {
+        cache: "no-store",
+      }
+    );
 
     if (!response.ok) {
       throw new Error("Product not found");
@@ -35,25 +45,23 @@ const ProductDetails = async ({ params }: { params: { id: string } }) => {
     return (
       <div className="max-w-4xl mx-auto p-8 bg-white text-black rounded-lg shadow-lg min-h-screen pb-24">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-12">
-          {/* Product Image */}
           <div className="relative w-full max-w-md h-96 mx-auto">
             <Image
               src={product.image}
               alt={product.title}
-              fill
-              className="rounded-lg shadow-lg object-contain"
+              layout="fill"
+              objectFit="contain"
+              className="rounded-lg shadow-lg"
               priority
             />
           </div>
 
-          {/* Product Details */}
           <div className="space-y-6">
             <h1 className="text-3xl sm:text-4xl font-bold">{product.title}</h1>
             <p className="text-lg sm:text-xl text-gray-700">
               {product.description}
             </p>
 
-            {/* Rating Section */}
             <div className="flex items-center space-x-2 text-gray-600">
               <div className="flex">
                 {[...Array(5)].map((_, index) => (
@@ -82,7 +90,6 @@ const ProductDetails = async ({ params }: { params: { id: string } }) => {
               </span>
             </div>
 
-            {/* Price and Category */}
             <div className="flex justify-between items-center">
               <p className="text-2xl font-semibold">
                 ${product.price.toFixed(2)}
@@ -92,14 +99,13 @@ const ProductDetails = async ({ params }: { params: { id: string } }) => {
               </span>
             </div>
 
-            {/* Add to Cart Button */}
             <Button product={product} value="Add to Cart" />
           </div>
         </div>
       </div>
     );
   } catch (error) {
-    console.error(error);
+    console.error("Error fetching product:", error);
     return (
       <div className="text-center text-red-500 mt-20">Product not found</div>
     );
