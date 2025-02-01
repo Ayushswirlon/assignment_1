@@ -2,7 +2,19 @@ import React from "react";
 import Link from "next/link";
 import { X } from "lucide-react";
 
-const MobileNav = ({ isOpen, setIsOpen, navLinks, pathname }) => {
+interface MobileNavProps {
+  isOpen: boolean;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  navLinks: { name: string; href: string }[];
+  pathname: string;
+}
+
+const MobileNav = ({
+  isOpen,
+  setIsOpen,
+  navLinks,
+  pathname,
+}: MobileNavProps) => {
   return (
     <div
       className={`${
