@@ -99,6 +99,7 @@ const ProductDetails = async ({ params }: { params: { id: string } }) => {
       </div>
     );
   } catch (error) {
+    console.error(error);
     return (
       <div className="text-center text-red-500 mt-20">Product not found</div>
     );
