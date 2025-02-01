@@ -104,7 +104,7 @@ export default function Home() {
           </select>
         </div>
 
-        {/* Rating Filter */}
+        {/* Rating Filter*/}
         <div className="w-full sm:w-auto">
           <select
             className="p-2 border rounded w-full sm:w-auto"
